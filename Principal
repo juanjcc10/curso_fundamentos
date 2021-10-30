@@ -1,0 +1,121 @@
+import java.util.Scanner;
+public class Principal
+{
+    public static void main(String[]args){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Ingrese por favor la cantidad de pisos");
+        int pisos = scan.nextInt(); 
+        System.out.println("Ingrese por favor la cantidad de espacios");
+        int espacios = scan.nextInt();
+        vehiculo.vehiculos = new vehiculo[pisos][espacios];
+        sensor.sensores = new sensor[pisos][espacios];
+        for(int i = 0;i<sensor.sensores.length;i++){
+            for(int j = 0;j<sensor.sensores.length;j++){
+                sensor sensorOOL = new sensor(0);
+                sensor.sensores[i][j] = sensorOOL;
+            }
+        }
+        vehiculo.tamaño = pisos * espacios;
+        System.out.println("Ingrese accion a realizar");
+        System.out.println("1: sensores desocupados.");
+        System.out.println("2: Estacionar vehiculo en piso y espacio deseado con un valor comercial de $ 30´000.000.");
+        System.out.println("3: Estacionar vehiculo en piso y espacio deseado.");
+        System.out.println("4: vehiculos almacenados.");
+        System.out.println("5: Historial vehiculos estacionados.");
+        System.out.println("6: Estado sensor.");
+        System.out.println("7: Estado de todos los sensores.");
+        System.out.println("0: Salir.");
+        System.out.print("Respuesta: ");
+        int accion = scan.nextInt();
+        while(accion*0 == 0){
+            int contador = 0;
+            if(accion==0){
+                contador +=1;
+            }
+            switch(accion){
+                case 0: 
+                    System.out.println("Saliendo..");
+                    break;
+                case 1:
+                    System.out.println(sensor.sensorLibre());
+                    break;
+                case 2:
+                    System.out.println("Ingrese el piso deseado");
+                    int pisod = scan.nextInt();
+                    System.out.println("Ingrese el espacio deseado");
+                    int lugard = scan.nextInt();
+                    if(sensor.sensores[pisod][lugard].getEstado()==1){
+                        System.out.println("No se puede realizar la accion");
+                    }else if(sensor.sensores[pisod][lugard].getEstado()==0){
+                        System.out.println("Ingrese la placa");
+                        String p = scan.next();
+                        System.out.println("Ingrese la marca");
+                        String m = scan.next();
+                        System.out.println("Ingrese el color");
+                        String c = scan.next();
+                        sensor.sensores[pisod][lugard].setEstado(1);
+                        vehiculo vehiculoGuardado = new vehiculo(p,m,c);
+                        vehiculo.vehiculos[pisod][lugard]= vehiculoGuardado;
+                        sensor sensorGuardado = new sensor(1);
+                        sensor.sensores[pisod][lugard] = sensorGuardado;
+                        System.out.println(vehiculo.vehiculos[pisod][lugard].toString());
+                    }
+                    break;
+                case 3:
+                System.out.println("Ingrese el piso deseado");
+                    int pisode = scan.nextInt();
+                    System.out.println("Ingrese el espacio deseado");
+                    int lugarde = scan.nextInt();
+                    if(sensor.sensores[pisode][lugarde]!=null){
+                        System.out.println("No se puede realizar la accion");
+                    }else if(sensor.sensores[pisode][lugarde]==null){
+                        System.out.println("Ingrese la placa");
+                        String p = scan.next();
+                        System.out.println("Ingrese la marca");
+                        String m = scan.next();
+                        System.out.println("Ingrese el color");
+                        String c = scan.next();
+                        System.out.println("Ingrese el valor comercial");
+                        int v = scan.nextInt();
+                        sensor.sensores[pisode][lugarde].setEstado(1);
+                        vehiculo vehiculoGuardado = new vehiculo(p,m,c,v);
+                        vehiculo.vehiculos[pisode][lugarde]= vehiculoGuardado;
+                        sensor sensorGuardado = new sensor(1);
+                        sensor.sensores[pisode][lugarde] = sensorGuardado;
+                        System.out.println(vehiculo.vehiculos[pisode][lugarde].toString());
+                    }
+                    break;
+                case 4:
+                    if(vehiculo.toStringVehiculos().length()>1){
+                        System.out.println(vehiculo.toStringVehiculos());
+                    }else{
+                        System.out.println("No hay vehículos en el estacionamiento.");
+                    }
+                    break;
+                case 5:
+                    System.out.println("El historial de cantidad de vehiculos estacionados es: " + vehiculo.cantidadVehiculos());
+                    break;
+                case 6:
+                    System.out.println("Ingrese el piso deseado");
+                    int pisoSendord = scan.nextInt();
+                    System.out.println("Ingrese el espacio deseado");
+                    int lugarSensord = scan.nextInt();
+                    System.out.println(sensor.sensores[pisoSendord][lugarSensord].toString());
+                    break;
+                case 7:
+                    System.out.println(sensor.sensoresEstado());
+                    break;
+                default:                
+                    System.out.println("Comando incorrecto");
+                    }
+            if(contador==1){
+                break;
+            }
+            System.out.println("Ingrese por favor la nueva accion a realizar");
+            
+            accion = scan.nextInt();
+        }
+        
+        
+    }
+}
