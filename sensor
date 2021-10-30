@@ -1,0 +1,53 @@
+public class sensor
+{
+    public static sensor[][] sensores; 
+    private int estado = 0;
+    public sensor(){}
+
+    public sensor(int e){
+        this.estado = e;
+    }
+
+    public void setEstado(int e){
+        this.estado = e;
+    }
+
+    public int getEstado(){
+        return this.estado;
+    }
+
+    public String toString(){
+        String estado1 = "";
+        if(this.estado == 0){
+            estado1 = "Libre";
+        }
+        if(this.estado == 1){
+            estado1 = "Ocupado";
+        }
+        return estado1;
+    }
+
+    public static String sensorLibre(){
+        String libre = "";
+        for(int i = 0;i<sensores.length;i++){
+            for(int j = 0;j<sensores[i].length;j++){ 
+                if(sensores[i][j].getEstado()==0){ 
+                    String libre0 = "Piso: " + i + " Espacio: " + j + " está libre. \n" ;
+                    libre = libre + libre0;
+                }
+            }
+        }
+        return libre;
+    }
+
+    public static String sensoresEstado(){
+        String estadoSensor = "";
+        for(int i = 0;i<sensores.length;i++){
+            for(int j = 0;j<sensores[i].length;j++){ 
+                String libre0 = "Piso: " + i + " Espacio: " + j + " está " + sensores[i][j].toString() + "\n";
+                estadoSensor=estadoSensor + libre0;
+            }
+        }
+        return estadoSensor;
+    }
+}
