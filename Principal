@@ -16,6 +16,7 @@ public class Principal
             }
         }
         vehiculo.tamaño = pisos * espacios;
+        System.out.println("Este parqueadero cuenta con " + pisos + " pisos, empezando por el piso 0 y cuenta con " + espacios + " espacios, empezando desde el espacio 0");
         System.out.println("Ingrese accion a realizar");
         System.out.println("1: sensores desocupados.");
         System.out.println("2: Estacionar vehiculo en piso y espacio deseado con un valor comercial de $ 30´000.000.");
@@ -34,7 +35,7 @@ public class Principal
             }
             switch(accion){
                 case 0: 
-                    System.out.println("Saliendo..");
+                    System.out.println("Saliendo...");
                     break;
                 case 1:
                     System.out.println(sensor.sensorLibre());
@@ -45,7 +46,7 @@ public class Principal
                     System.out.println("Ingrese el espacio deseado");
                     int lugard = scan.nextInt();
                     if(sensor.sensores[pisod][lugard].getEstado()==1){
-                        System.out.println("No se puede realizar la accion");
+                        System.out.println("No se puede realizar la acción");
                     }else if(sensor.sensores[pisod][lugard].getEstado()==0){
                         System.out.println("Ingrese la placa");
                         String p = scan.next();
@@ -62,13 +63,13 @@ public class Principal
                     }
                     break;
                 case 3:
-                System.out.println("Ingrese el piso deseado");
+                    System.out.println("Ingrese el piso deseado");
                     int pisode = scan.nextInt();
                     System.out.println("Ingrese el espacio deseado");
                     int lugarde = scan.nextInt();
-                    if(sensor.sensores[pisode][lugarde]!=null){
-                        System.out.println("No se puede realizar la accion");
-                    }else if(sensor.sensores[pisode][lugarde]==null){
+                    if(sensor.sensores[pisode][lugarde].getEstado()==1){
+                        System.out.println("No se puede realizar la acción");
+                    }else if(sensor.sensores[pisode][lugarde].getEstado()==0){
                         System.out.println("Ingrese la placa");
                         String p = scan.next();
                         System.out.println("Ingrese la marca");
@@ -93,7 +94,7 @@ public class Principal
                     }
                     break;
                 case 5:
-                    System.out.println("El historial de cantidad de vehiculos estacionados es: " + vehiculo.cantidadVehiculos());
+                    System.out.println("El historial de cantidad de vehículos estacionados es: " + vehiculo.cantidadVehiculos());
                     break;
                 case 6:
                     System.out.println("Ingrese el piso deseado");
@@ -105,17 +106,38 @@ public class Principal
                 case 7:
                     System.out.println(sensor.sensoresEstado());
                     break;
-                default:                
-                    System.out.println("Comando incorrecto");
+                case 8:
+                    System.out.println("Ingrese el color: ");
+                    String showCol = scan.next();
+                    String carrCol2 = "";
+                    boolean carrCol = false;
+                    for(int i = 0;i<sensor.sensores.length;i++){
+                        for(int j = 0;j<sensor.sensores[i].length;j++){
+                            if((vehiculo.vehiculos[i][j]!=null) && (vehiculo.vehiculos[i][j].getColor().equalsIgnoreCase(showCol))){
+                                carrCol2 += vehiculo.vehiculos[i][j].toString() + "\n";
+                                carrCol = true;
+                            }
+                        }
                     }
+                    if(carrCol == true){
+                        System.out.println("Estos son los vehículos de color: "+ showCol);
+                        System.out.println(carrCol2);
+                    }else{
+                        System.out.println("No hay coincidencias de color " + showCol);
+                    }
+                    break;
+                case 9:
+                    System.out.println("Estos son los vehículos organizados por valor ascendente:" + vehiculo.ValorComercialAsc(vehiculo.vehiculos));                     
+                    break;
+                default:
+                    System.out.println("Comando incorrecto");
+
+            }
             if(contador==1){
                 break;
             }
-            System.out.println("Ingrese por favor la nueva accion a realizar");
-            
+            System.out.println("Ingrese por favor la nueva acción a realizar: ");
             accion = scan.nextInt();
         }
-        
-      
     }
 }
