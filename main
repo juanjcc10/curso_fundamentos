@@ -1,0 +1,22 @@
+import java.util.Scanner;
+public class Principal
+{
+    public static void main(String[]args){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Ingrese por favor la cantidad de pisos");
+        int pisos = scan.nextInt(); 
+        System.out.println("Ingrese por favor la cantidad de espacios");
+        int espacios = scan.nextInt();
+        vehiculo.vehiculos = new vehiculo[pisos][espacios];
+        sensor.sensores = new sensor[pisos][espacios];
+        for(int i = 0;i<sensor.sensores.length;i++){
+            for(int j = 0;j<sensor.sensores.length;j++){
+                sensor sensorOOL = new sensor(0);
+                sensor.sensores[i][j] = sensorOOL;
+            }
+        }
+        vehiculo.tamaño = pisos * espacios;
+        System.out.println("Ingrese accion a realizar");
+        System.out.println("1: sensores desocupados.");
+        System.out.println("2: Estacionar vehiculo en piso y espacio deseado con un valor comercial de $ 30´000.000.
+        System.out.println("4: vehiculos almacenados.
